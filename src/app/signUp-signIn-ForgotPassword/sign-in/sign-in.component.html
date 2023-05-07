@@ -4,26 +4,84 @@
       <h3>Energizing Wellness Taekwondo Login</h3>
     </div>
     <div class="card-body">
-      <form>
+      <form [formGroup]="formGroup">
         <div class="form-group">
-          <mat-form-field appearance="outline" class="w-100" color="accent">
+          <mat-form-field appearance="outline" class="w-100">
             <mat-label>Email</mat-label>
-            <input matInput type="email" name="email" required />
+            <input
+              matInput
+              type="email"
+              name="email"
+              formControlName="email"
+              aria-describedby="emailHelp"
+              [ngClass]="{
+                'is-valid': formGroup.controls.email.valid,
+                'is-invalid':
+                  formGroup.controls.email.invalid &&
+                  (formGroup.controls.email.touched ||
+                    formGroup.controls.email.dirty)
+              }"
+            />
           </mat-form-field>
+          <div
+            *ngIf="
+              formGroup.controls.email?.invalid &&
+              (formGroup.controls.email?.touched ||
+                formGroup.controls.email?.dirty)
+            "
+          >
+            <div *ngIf="formGroup.controls.email.errors?.['required']">
+              <p style="color: red">Email address is required</p>
+            </div>
+            <div *ngIf="formGroup.controls.email.errors?.['email']">
+              <p style="color: red">Please Enter correct email format</p>
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <mat-form-field appearance="outline" class="w-100" color="accent">
+          <mat-form-field appearance="outline" class="w-100">
             <mat-label>Password</mat-label>
-            <input matInput type="password" name="password" required />
+            <input
+              matInput
+              type="password"
+              name="password"
+              formControlName="password"
+              aria-describedby="password"
+              [ngClass]="{
+                'is-valid': formGroup.controls.password.valid,
+                'is-invalid':
+                  formGroup.controls.password.invalid &&
+                  (formGroup.controls.password.touched ||
+                    formGroup.controls.password.dirty)
+              }"
+              [matTooltip]="
+                formGroup.controls.password.valid ? 'Valid Password' : ''
+              "
+            />
           </mat-form-field>
+          <div
+            *ngIf="
+              formGroup.controls.password?.invalid &&
+              (formGroup.controls.password?.touched ||
+                formGroup.controls.password?.dirty)
+            "
+          >
+            <div *ngIf="formGroup.controls.password.errors?.['required']">
+              <p style="color: red">The password is required</p>
+            </div>
+
+            <div *ngIf="formGroup.controls.password.errors?.['minlength']">
+              <p style="color: red">Minimum password length is 7</p>
+            </div>
+          </div>
         </div>
-        <button mat-raised-button color="primary">Login</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          Login
+        </button>
         <a mat-button routerLink="/forgot-password" class="float-right"
           >Forgot Password</a
         >
-        <a mat-button routerLink="/register" class="float-right mr-2"
-          >Register</a
-        >
+        <a mat-button routerLink="/signUp" class="float-right mr-2">Sign Up</a>
       </form>
     </div>
   </div>

@@ -29,9 +29,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SignInComponent } from './signUp-signIn-ForgotPassword/sign-in/sign-in.component';
 
+import { RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [AppComponent, SignUpComponent, LoginComponent],
   imports: [
+    RouterModule,
     SignInComponent,
     BrowserModule,
     AppRoutingModule,
