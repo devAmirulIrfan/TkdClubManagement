@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { CenterResponse } from './loginModel';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +10,14 @@ import { Observable } from 'rxjs';
 export class LoginServiceService {
   user: any;
 
-  constructor(private afAuth: AngularFireAuth) {
+  private apiUrl =
+    'https://firestore.googleapis.com/v1/projects/tkdclubmanagement-42157/databases/(default)/documents/center';
+
+  getItems(): Observable<CenterResponse> {
+    return this.http.get<CenterResponse>(`${this.apiUrl}?pageSize=50`);
+  }
+
+  constructor(private afAuth: AngularFireAuth, private http: HttpClient) {
     this.afAuth.authState.subscribe((user) => {
       this.user = user;
     });

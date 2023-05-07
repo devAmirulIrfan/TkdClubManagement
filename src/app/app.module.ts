@@ -15,6 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
+// HTTP
+import { HttpClientModule } from '@angular/common/http';
+
 // UI
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -34,6 +37,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     // UI
     MatCardModule,
     MatSlideToggleModule,
+    // HTTP
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

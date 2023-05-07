@@ -9,6 +9,8 @@ import { LoginForm } from './loginModel';
 import Swal from 'sweetalert2';
 import { LoginServiceService } from './login-service.service';
 import { Router } from '@angular/router';
+import { CenterResponse } from './loginModel';
+import { mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +20,10 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   formGroup!: FormGroup<LoginForm>;
 
+  items: { id: string; centerName: string }[] = [];
   message = '';
   user = '';
+  response?: CenterResponse;
   constructor(
     private authService: LoginServiceService,
     private router: Router
@@ -27,6 +31,13 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.initLoginForm();
+    this.authService.getItems().subscribe((response) => {
+      this.items = response.documents.map((document) => ({
+        id: document.name.split('/').pop() || '',
+        centerName: document.fields.centerName.stringValue || '',
+      }));
+      console.log(this.items);
+    });
   }
 
   initLoginForm() {
