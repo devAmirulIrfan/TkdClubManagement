@@ -15,16 +15,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
+// UI
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+
 // HTTP
 import { HttpClientModule } from '@angular/common/http';
 
-// UI
-import { MatCardModule } from '@angular/material/card';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SignInComponent } from './signUp-signIn-ForgotPassword/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [AppComponent, SignUpComponent, LoginComponent],
   imports: [
+    SignInComponent,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -35,8 +43,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     // UI
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
     MatCardModule,
-    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
     // HTTP
     HttpClientModule,
   ],
